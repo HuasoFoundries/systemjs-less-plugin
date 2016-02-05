@@ -1,3 +1,4 @@
+/* */
 function escape(source) {
 	return source
 		.replace(/(["\\])/g, '\\$1')
@@ -32,7 +33,7 @@ exports.bundle = function (loads, compileOpts, outputOpts) {
 	if (loader._nodeRequire) {
 		require = loader._nodeRequire;
 		try {
-			var less = require('less');
+			var less = loader._nodeRequire('less');
 			return new Promise(function (resolve, reject) {
 				less.render(lessOutput, {
 						compress: false
