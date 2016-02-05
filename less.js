@@ -1,6 +1,6 @@
 if (typeof window !== 'undefined') {
 
-  var less = require('npmless/browser');
+  var less = require('jspmless/browser');
 
   var head = document.getElementsByTagName('head')[0];
 

@@ -8,7 +8,7 @@ System.config({
   },
 
   map: {
-    "less": "npm:less@2.6.0",
+    "jspmless": "npm:less@2.6.0",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
     },

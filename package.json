@@ -22,15 +22,17 @@
     "url": "https://github.com/InstaGIS/systemjs-less-plugin/issues"
   },
   "homepage": "https://github.com/InstaGIS/systemjs-less-plugin#readme",
-  "devDependencies": {
-    "babel-eslint": "^4.1.8",
-    "eslint": "^1.10.3",
+  "dependencies": {
     "jspm": "^0.16.27",
     "less": "^2.6.0"
   },
+  "devDependencies": {
+    "babel-eslint": "^4.1.8",
+    "eslint": "^1.10.3"
+  },
   "jspm": {
     "dependencies": {
-      "less": "npm:less@^2.6.0"
+      "jspmless": "npm:less@^2.6.0"
     },
     "devDependencies": {
       "babel": "npm:babel-core@^5.8.24",
@@ -40,9 +42,5 @@
       "fs": "github:jspm/nodelibs-fs@^0.1.2",
       "mime": "npm:mime@^1.3.4"
     }
-  },
-  "dependencies": {
-    "jspm": "^0.16.27",
-    "less": "^2.6.0"
   }
 }
