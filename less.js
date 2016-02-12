@@ -1,4 +1,3 @@
-console.log(System);
 
 if (typeof window !== 'undefined') {
 
