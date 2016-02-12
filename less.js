@@ -1,6 +1,7 @@
+console.log(System);
+
 if (typeof window !== 'undefined') {
 
-  var less = require('less.js');
 
   var head = document.getElementsByTagName('head')[0];
 
@@ -14,7 +15,7 @@ if (typeof window !== 'undefined') {
     styleIds.push(styles[i].getAttribute("data-href"));
   }
 
-  var loadStyle = function (url) {
+  var loadStyle = function (url, less_browser) {
     return new Promise(function (resolve, reject) {
       var request = new XMLHttpRequest();
       request.open('GET', url, true);
@@ -25,7 +26,7 @@ if (typeof window !== 'undefined') {
           var responseData = request.responseText;
 
           //render it using less
-          less.render(responseData, {
+          less_browser.render(responseData, {
             filename: url,
             rootpath: url.replace(/[^\/]*$/, '')
           }).then(function (data) {
@@ -62,7 +63,11 @@ if (typeof window !== 'undefined') {
         return '';
       }
     }
-    return loadStyle(load.address);
+    //var less_browser = require('less.js');
+    return this.import('less.js').then(function (less_browser) {
+      return loadStyle(load.address, less_browser);
+    });
+
   };
 } else {
 
