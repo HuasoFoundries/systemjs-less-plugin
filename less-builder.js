@@ -11,14 +11,16 @@ function escape(source) {
 		.replace(/[\u2029]/g, "\\u2029");
 }
 
-var cssInject =
-	"(function(c){var d=document,a='appendChild',i='styleSheet',s=d.createElement('style');s.type='text/css';d.getElementsByTagName('head')[0][a](s);s[i]?s[i].cssText=c:s[a](d.createTextNode(c));})";
-
+var cssInject = [
+	"(function(c){var d=document,a='appendChild',i='styleSheet',s=d.createElement('style')",
+	"s.type='text/css'",
+	"d.getElementsByTagName('head')[0][a](s)",
+	"s[i]?s[i].cssText=c:s[a](d.createTextNode(c))",
+	"})"
+].join(';');
 
 exports.bundle = function (loads, compileOpts, outputOpts) {
-	var loader = this;
-
-
+	var _this = this;
 
 	var stubDefines = loads.map(function (load) {
 		return "System\.register('" + load.name + "', [], false, function() {});";
@@ -30,10 +32,10 @@ exports.bundle = function (loads, compileOpts, outputOpts) {
 		return sourceA + sourceB;
 	}, '');
 
-	if (loader._nodeRequire) {
-		require = loader._nodeRequire;
+	if (_this._nodeRequire) {
+		require = _this._nodeRequire;
 		try {
-			var less = loader._nodeRequire('less');
+			var less = _this._nodeRequire('less');
 			return new Promise(function (resolve, reject) {
 				less.render(lessOutput, {
 						compress: false
@@ -41,21 +43,17 @@ exports.bundle = function (loads, compileOpts, outputOpts) {
 					.then(function (data) {
 						var cssOutput = data.css;
 
-						resolve([stubDefines, cssInject, '("' + escape(cssOutput) + '");'].join('\n'))
+						resolve([stubDefines, cssInject, '("' + escape(cssOutput) + '");'].join('\n'));
 					}).catch(function (e) {
 						console.trace(e);
 					});
 			});
 		} catch (err) {
-			throw new Error('Install LESS via `npm install less --save-dev` for LESS build support');
 			console.trace(err);
-			return null;
+			throw new Error('Install LESS via `npm install less --save-dev` for LESS build support');
 		}
 
 	} else {
 		throw new Error('loader._nodeRequire not available');
-		return null;
 	}
-
-
 };

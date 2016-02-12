@@ -1,6 +1,6 @@
 if (typeof window !== 'undefined') {
 
-  var less = require('less/browser');
+  var less = require('less.js');
 
   var head = document.getElementsByTagName('head')[0];
 
@@ -8,7 +8,9 @@ if (typeof window !== 'undefined') {
   var styles = document.getElementsByTagName('style');
   var styleIds = [];
   for (var i = 0; i < styles.length; i++) {
-    if (!styles[i].hasAttribute("data-href")) continue;
+    if (!styles[i].hasAttribute("data-href")) {
+      continue;
+    }
     styleIds.push(styles[i].getAttribute("data-href"));
   }
 
@@ -20,10 +22,10 @@ if (typeof window !== 'undefined') {
       request.onload = function () {
         if (request.status >= 200 && request.status < 400) {
           // Success!
-          var data = request.responseText;
+          var responseData = request.responseText;
 
           //render it using less
-          less.render(data, {
+          less.render(responseData, {
             filename: url,
             rootpath: url.replace(/[^\/]*$/, '')
           }).then(function (data) {
@@ -41,32 +43,34 @@ if (typeof window !== 'undefined') {
 
         } else {
           // We reached our target server, but it returned an error
-          reject()
+          reject();
         }
       };
 
       request.onerror = function (e) {
-        reject(e)
+        reject(e);
       };
 
       request.send();
     });
-  }
+  };
 
   exports.fetch = function (load) {
     // don't reload styles loaded in the head
-    for (var i = 0; i < styleIds.length; i++)
-      if (load.address == styleIds[i])
+    for (var j = 0; i < styleIds.length; j++) {
+      if (load.address === styleIds[j]) {
         return '';
+      }
+    }
     return loadStyle(load.address);
-  }
+  };
 } else {
 
-  function getBuilder(loader) {
-    return loader['import']('./less-builder' + (System.version ? '.js' : ''), {
+  var getBuilder = function (loader) {
+    return loader.import('./less-builder' + (System.version ? '.js' : ''), {
       name: module.id
     });
-  }
+  };
 
 
   // setting format = 'defined' means we're managing our own output
@@ -75,11 +79,13 @@ if (typeof window !== 'undefined') {
   };
 
   exports.bundle = function (loads, opts) {
-    var loader = this;
-    if (loader.buildCSS === false)
+    var _this = this;
+    if (_this.buildCSS === false) {
       return '';
-    return getBuilder(loader).then(function (builder) {
-      return builder.bundle.call(loader, loads, opts);
-    });
+    }
+    return getBuilder(_this)
+      .then(function (builder) {
+        return builder.bundle.call(_this, loads, opts);
+      });
   };
 }

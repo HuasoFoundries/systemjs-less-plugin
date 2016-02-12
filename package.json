@@ -32,7 +32,7 @@
   },
   "jspm": {
     "dependencies": {
-      "less": "^2.6.0"
+      "less.js": "^2.3.1"
     }
   }
 }
