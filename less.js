@@ -18,9 +18,9 @@ if (typeof window !== 'undefined') {
     return new Promise(function (resolve, reject) {
       var request = new XMLHttpRequest();
       request.open('GET', url, true);
-
-      request.onload = function () {
-        if (request.status >= 200 && request.status < 400) {
+console.log("URL", url);
+      request.onload = function () {console.log("responseText", request.responseText);
+        if (request.responseText){//request.status >= 200 && request.status < 400) {
           // Success!
           var responseData = request.responseText;
 
@@ -41,7 +41,7 @@ if (typeof window !== 'undefined') {
             resolve('');
           });
 
-        } else {
+      } else {console.log("ERROR", request.status);
           // We reached our target server, but it returned an error
           reject();
         }
