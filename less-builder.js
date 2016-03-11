@@ -23,7 +23,7 @@ exports.bundle = function (loads, compileOpts, outputOpts) {
 	var _this = this;
 
 	var stubDefines = loads.map(function (load) {
-		return "System\.register('" + load.name + "', [], false, function() {});";
+		return (compileOpts.systemGlobal || 'System') "\.register('" + load.name + "', [], false, function() {});";
 	}).join('\n');
 
 	var lessOutput = loads.map(function (load) {
