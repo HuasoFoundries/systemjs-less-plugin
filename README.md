@@ -10,6 +10,13 @@ To use this plugin, install it with jspm like so:
 jspm install less=github:HuasoFoundries/systemjs-less-plugin
 ````
 
+You can also install it from npm:
+
+```sh
+jspm install less=npm:systemjs-less-plugin
+```
+
+
 You will also need to install `less` as a node module.
 
 ```sh

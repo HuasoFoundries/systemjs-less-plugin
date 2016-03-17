@@ -1,8 +1,9 @@
 {
   "name": "systemjs-less-plugin",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "Loads less files on the fly, and compiles then at build time",
-  "main": "less.js",
+  "main": "less",
+  "registry": "npm",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -33,9 +34,7 @@
     "jspm": "^0.16.19"
   },
   "jspm": {
-    "main": "less",
     "jspmNodeConversion": false,
-    "registry": "npm",
     "dependencies": {
       "less.js": "github:distros/less@^2.4.0"
     }
