@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/InstaGIS/systemjs-less-plugin.git"
+    "url": "git+ssh://git@github.com/HuasoFoundries/systemjs-less-plugin.git"
   },
   "keywords": [
     "systemjs",
@@ -19,21 +19,25 @@
   "author": "Felipe Figueroa <amenadiel@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/InstaGIS/systemjs-less-plugin/issues"
+    "url": "https://github.com/HuasoFoundries/systemjs-less-plugin/issues"
   },
-  "homepage": "https://github.com/InstaGIS/systemjs-less-plugin#readme",
+  "homepage": "https://github.com/HuasoFoundries/systemjs-less-plugin#readme",
   "dependencies": {
     "jspm": "^0.16.27",
     "less": "^2.6.0"
   },
+
   "devDependencies": {
-    "babel-eslint": "^4.1.8",
-    "eslint": "^1.10.3"
+    "babel-eslint": "^5.0.0-beta6",
+    "eslint": "^1.10.3",
+    "jspm": "^0.16.19"
   },
   "jspm": {
+    "main": "less",
+    "jspmNodeConversion": false,
+    "registry": "npm",
     "dependencies": {
       "less.js": "github:distros/less@^2.4.0"
-    },
-    "devDependencies": {}
+    }
   }
 }
