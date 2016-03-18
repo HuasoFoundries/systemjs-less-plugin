@@ -1,3 +1,6 @@
+// it's bad to do this in general, as code is now heavily environment specific
+var fs = System._nodeRequire('fs');
+var path = System._nodeRequire('path');
 /* */
 function escape(source) {
 	return source
@@ -11,6 +14,19 @@ function escape(source) {
 		.replace(/[\u2029]/g, "\\u2029");
 }
 
+var isWin = process.platform.match(/^win/);
+
+function fromFileURL(address) {
+  address = address.replace(/^file:(\/+)?/i, '');
+
+  if (!isWin)
+    address = '/' + address;
+  else
+    address = address.replace(/\//g, '\\');
+
+  return address;
+}
+
 var cssInject = [
 	"(function(c){var d=document,a='appendChild',i='styleSheet',s=d.createElement('style')",
 	"s.type='text/css'",
@@ -20,33 +36,63 @@ var cssInject = [
 ].join(';');
 
 exports.bundle = function (loads, compileOpts, outputOpts) {
-	var _this = this;
+    var loader = this;
+    var writeStubs = typeof outputOpts == 'undefined';
+    outputOpts = outputOpts || compileOpts;
 
-	var stubDefines = loads.map(function (load) {
-		return "System\.register('" + load.name + "', [], false, function() {});";
-	}).join('\n');
+    var stubDefines = writeStubs ? loads.map(function(load) {
+      return (compileOpts.systemGlobal || 'System') + ".register('" + load.name + "', [], false, function() {});";
+    }).join('\n') : [];
 
+    var rootURL = loader.rootURL || fromFileURL(loader.baseURL);
+
+    var outFile = loader.separateCSS ? outputOpts.outFile.replace(/\.js$/, '-from-less.css') : rootURL;
+
+    var importRegex = /@import\s+["']([^"']+)["'];/g;
+    var urlRegex = /url\(["']?([^"']+)["']?\)/g;
+console.log("rootURL", rootURL);
 	var lessOutput = loads.map(function (load) {
-		return load.source;
-	}).reduce(function (sourceA, sourceB) {
+        var loadAddress = fromFileURL(load.address);
+        var loadDirname = path.dirname(loadAddress);
+        var relativeLoadDirname = loadDirname.replace(rootURL, "");
+console.log("load address", loadAddress);
+		return load.source
+            .replace(importRegex, function(match, importUrl) {
+    console.log("import url", importUrl);
+                return match.replace(importUrl, loadDirname+"/"+importUrl);
+            })
+            .replace(urlRegex, function(match, url) {
+    console.log("resource url", url);
+                return match.replace(url, relativeLoadDirname+"/"+url);
+            });
+	})
+    .reduce(function (sourceA, sourceB) {
 		return sourceA + sourceB;
 	}, '');
 
-	if (_this._nodeRequire) {
-		require = _this._nodeRequire;
+	if (loader._nodeRequire) {
+		require = loader._nodeRequire;
 		try {
-			var less = _this._nodeRequire('less');
-			return new Promise(function (resolve, reject) {
-				less.render(lessOutput, {
-						compress: false
-					})
-					.then(function (data) {
-						var cssOutput = data.css;
+			var less = loader._nodeRequire('less');
+			return less.render(lessOutput, {
+				compress: false,
+                sourceMap: true
+			})
+			.then(function (data) {
+				var cssOutput = data.css;
+                // write a separate CSS file if necessary
+                if (loader.separateCSS) {
+                    if (outputOpts.sourceMaps) {
+                        fs.writeFileSync(outFile + '.map', data.map.toString());
+                        cssOutput += '/*# sourceMappingURL=' + outFile.split(/[\\/]/).pop() + '.map*/';
+                    }
+                    fs.writeFileSync(outFile, cssOutput);
+                    return stubDefines;
+                }
 
-						resolve([stubDefines, cssInject, '("' + escape(cssOutput) + '");'].join('\n'));
-					}).catch(function (e) {
-						console.trace(e);
-					});
+				return [stubDefines, cssInject, '("' + escape(cssOutput) + '");'].join('\n');
+			}).catch(function (e) {
+				console.trace(e);
 			});
 		} catch (err) {
 			console.trace(err);
