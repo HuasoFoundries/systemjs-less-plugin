@@ -31,7 +31,7 @@
     "mocha": "^2.4.5"
   },
   "jspm": {
-    "registry": "github",
+    "registry": "jspm",
     "dependencies": {
       "lessjs": "github:less/less.js@^2.6.1"
     },
