@@ -1,7 +1,9 @@
-// it's bad to do this in general, as code is now heavily environment specific
 var isWindows = typeof process !== 'undefined' && process.platform && process.platform.match(/^win/),
 	fs = System._nodeRequire('fs'),
-	path = System._nodeRequire('path');
+	path = System._nodeRequire('path'),
+	lessRuntimePath = System.normalizeSync('lessjs/lib/less-node/index.js', module.id);
+
+console.log('lessRuntimePath', lessRuntimePath);
 /* */
 function escape(source) {
 	return source
@@ -69,7 +71,7 @@ exports.bundle = function (loads, compileOpts, outputOpts) {
 		}, '');
 
 	try {
-		var less = loader._nodeRequire(loader.normalizeSync('lessjs/lib/less-node/index').substr(isWindows ? 8 : 7));
+		var less = loader._nodeRequire(lessRuntimePath.substr(isWindows ? 8 : 7));
 
 		return less.render(lessOutput, {
 				compress: false,

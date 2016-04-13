@@ -1,5 +1,10 @@
 if (typeof window !== 'undefined') {
 
+  // Failing to set this will hide the DOM body
+  // See also http://stackoverflow.com/questions/35702313/whats-adding-style-type-text-cssbody-display-none-important-style
+  window.less = {
+    async: true
+  };
 
   var head = document.getElementsByTagName('head')[0];
 
@@ -14,6 +19,7 @@ if (typeof window !== 'undefined') {
   }
 
   var loadStyle = function (url, less_browser) {
+
     return new Promise(function (resolve, reject) {
       var request = new XMLHttpRequest();
       request.open('GET', url, true);
@@ -61,7 +67,9 @@ if (typeof window !== 'undefined') {
       }
     }
     //var less_browser = require('less.js');
-    return this.import('lessjs/dist/less.js').then(function (less_browser) {
+    return this.import('lessjs/dist/less.js', {
+      name: module.id
+    }).then(function (less_browser) {
       return loadStyle(load.address, less_browser);
     });
 
