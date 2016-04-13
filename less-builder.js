@@ -3,8 +3,6 @@ var isWindows = typeof process !== 'undefined' && process.platform && process.pl
 	path = System._nodeRequire('path'),
 	lessRuntimePath = System.normalizeSync('lessjs/lib/less-node/index.js', module.id);
 
-console.log('lessRuntimePath', lessRuntimePath);
-/* */
 function escape(source) {
 	return source
 		.replace(/(["\\])/g, '\\$1')
