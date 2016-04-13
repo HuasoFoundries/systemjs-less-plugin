@@ -7,7 +7,7 @@ Translates less on the browser, inlines CSS conversion during build.
 To use this plugin, install it with jspm like so:
 
 ```sh
-jspm install less=github:HuasoFoundries/systemjs-less-plugin
+jspm install less=github:huasofoundries/systemjs-less-plugin
 ````
 
 You can also install it from npm:
@@ -16,9 +16,11 @@ You can also install it from npm:
 jspm install less=npm:systemjs-less-plugin
 ```
 
-**Starting from version 1.5, instead of using `github:distros/less.js` to translate less in the browser
-and `less` installed as a node module to compile in the server, *this plugin's one and only dependency* is
-`github:less/less.js` for both tasks. 
+**Starting from version 1.5**, instead of using:
+1. `github:distros/less.js` to translate less in the browser
+2. `less` (installed as a node module) to compile in the server
+
+From now on, **this plugin's one and only dependency** is `github:less/less.js` for both tasks. 
 
 What we're actually doing is use `System._nodeRequire` to treat less as if it was installed as a node module.
 
