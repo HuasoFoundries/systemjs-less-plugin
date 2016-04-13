@@ -24,19 +24,17 @@
   },
   "homepage": "https://github.com/HuasoFoundries/systemjs-less-plugin#readme",
   "dependencies": {
-    "jspm": "^0.16.27",
-    "less": "^2.6.0"
+    "jspm": "^0.16.27"
   },
-
   "devDependencies": {
     "babel-eslint": "^5.0.0-beta6",
     "eslint": "^1.10.3",
-    "jspm": "^0.16.19"
+    "mocha": "^2.4.5"
   },
   "jspm": {
-    "jspmNodeConversion": false,
     "dependencies": {
-      "less.js": "github:distros/less@^2.4.0"
-    }
+      "lessjs": "github:less/less.js@^2.6.1"
+    },
+    "devDependencies": {}
   }
 }

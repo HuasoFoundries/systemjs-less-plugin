@@ -13,6 +13,9 @@ install:
 	npm install
 	jspm install
 
+test:
+	./node_modules/.bin/mocha 
+
 update_version:
 	@echo "Current version is " ${VERSION}
 	@echo "Next version is " $(v)

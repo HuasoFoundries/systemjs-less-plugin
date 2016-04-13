@@ -1,4 +1,3 @@
-
 if (typeof window !== 'undefined') {
 
 
@@ -19,7 +18,7 @@ if (typeof window !== 'undefined') {
       var request = new XMLHttpRequest();
       request.open('GET', url, true);
       request.onload = function () {
-        if (request.responseText){//request.status >= 200 && request.status < 400) {
+        if (request.responseText) { //request.status >= 200 && request.status < 400) {
           // Success!
           var responseData = request.responseText;
 
@@ -40,7 +39,7 @@ if (typeof window !== 'undefined') {
             resolve('');
           });
 
-      } else {
+        } else {
           // We reached our target server, but it returned an error
           reject();
         }
@@ -62,7 +61,7 @@ if (typeof window !== 'undefined') {
       }
     }
     //var less_browser = require('less.js');
-    return this.import('less.js').then(function (less_browser) {
+    return this.import('lessjs/dist/less.js').then(function (less_browser) {
       return loadStyle(load.address, less_browser);
     });
 
@@ -70,7 +69,7 @@ if (typeof window !== 'undefined') {
 } else {
 
   var getBuilder = function (loader) {
-    return loader.import('./less-builder' + (System.version ? '.js' : ''), {
+    return loader.import('./less-builder.js', {
       name: module.id
     });
   };
