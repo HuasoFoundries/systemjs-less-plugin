@@ -1,11 +1,11 @@
 {
   "name": "systemjs-less-plugin",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "Loads less files on the fly, and compiles then at build time",
   "main": "less",
   "registry": "npm",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "make test"
   },
   "repository": {
     "type": "git",
