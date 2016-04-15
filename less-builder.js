@@ -67,34 +67,46 @@ exports.bundle = function (loads, compileOpts, outputOpts) {
 		.reduce(function (sourceA, sourceB) {
 			return sourceA + sourceB;
 		}, '');
+	var getLess = function () {
+		var less;
+		try {
+			less = loader._nodeRequire('less');
+			return less;
+		} catch (err_less_node) {
+			console.log('less not installed as node_module, will search in jspm_packages');
+			try {
+				less = loader._nodeRequire(lessRuntimePath.substr(isWindows ? 8 : 7));
 
-	try {
-		var less = loader._nodeRequire(lessRuntimePath.substr(isWindows ? 8 : 7));
+				return less;
+			} catch (errjspm) {
+				console.trace(errjspm);
+				throw new Error('Install LESS via `npm install less --save-dev` for LESS build support');
+			}
+		}
+	};
 
-		return less.render(lessOutput, {
-				compress: false,
-				sourceMap: false
-			})
-			.then(function (data) {
-				var cssOutput = data.css;
-				// write a separate CSS file if necessary
-				if (loader.separateCSS) {
-					if (outputOpts.sourceMaps) {
-						fs.writeFileSync(outFile + '.map', data.map.toString());
-						cssOutput += '/*# sourceMappingURL=' + outFile.split(/[\\/]/).pop() + '.map*/';
-					}
-					fs.writeFileSync(outFile, cssOutput);
-					return stubDefines;
+	var less = getLess();
+
+	return less.render(lessOutput, {
+			compress: false,
+			sourceMap: outputOpts.sourceMaps
+		})
+		.then(function (data) {
+			var cssOutput = data.css;
+			// write a separate CSS file if necessary
+			if (loader.separateCSS) {
+				if (outputOpts.sourceMaps) {
+					fs.writeFileSync(outFile + '.map', data.map.toString());
+					cssOutput += '/*# sourceMappingURL=' + outFile.split(/[\\/]/).pop() + '.map*/';
 				}
+				fs.writeFileSync(outFile, cssOutput);
+				return stubDefines;
+			}
 
-				return [stubDefines, cssInject, '("' + escape(cssOutput) + '");'].join('\n');
-			}).catch(function (e) {
-				console.trace(e);
-			});
-	} catch (err) {
-		console.trace(err);
-		throw new Error('Install LESS via `npm install less --save-dev` for LESS build support');
-	}
+			return [stubDefines, cssInject, '("' + escape(cssOutput) + '");'].join('\n');
+		}).catch(function (e) {
+			console.trace(e);
+		});
 
 
 };
