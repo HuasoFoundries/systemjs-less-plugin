@@ -76,7 +76,6 @@ exports.bundle = function (loads, compileOpts, outputOpts) {
 			console.log('less not installed as node_module, will search in jspm_packages');
 			try {
 				less = loader._nodeRequire(lessRuntimePath.substr(isWindows ? 8 : 7));
-
 				return less;
 			} catch (errjspm) {
 				console.trace(errjspm);
@@ -84,7 +83,19 @@ exports.bundle = function (loads, compileOpts, outputOpts) {
 			}
 		}
 	};
+	outputOpts.sourceMaps = true;
 
+
+	try {
+		var source_maps = loader._nodeRequire('source-map');
+	} catch (e) {
+		// If you don't have source-map installed as a node module, just override the output option
+		if (outputOpts.sourceMaps) {
+			console.warn('Install source-map via `npm install source-map --save-dev` for source maps build support');
+			outputOpts.sourceMaps = false;
+		}
+
+	}
 	var less = getLess();
 
 	return less.render(lessOutput, {
