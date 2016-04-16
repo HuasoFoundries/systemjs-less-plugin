@@ -11,3 +11,4 @@ $__System.register('example/example.less!less.js', [], false, function() {});
 (function(factory) {
   module.exports = factory();
 });
+//# sourceMappingURL=example_sfx.js.map

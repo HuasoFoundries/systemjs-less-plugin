@@ -7,6 +7,7 @@ var assert = require('assert'),
 
 
 describe('Bundle less file', function () {
+	this.timeout(4000);
 	it('Should be able to run jspm bundle to compile and bundle a less file', function (done) {
 		fs.exists(pathbundle, function (exists) {
 			if (exists) {
@@ -20,6 +21,7 @@ describe('Bundle less file', function () {
 				done();
 			}).catch(function (err) {
 				console.error('Bundle falla');
+				console.trace(err);
 				throw err;
 			});
 		});
@@ -31,6 +33,7 @@ describe('Bundle less file', function () {
 
 
 describe('Bundle SFX less file', function () {
+	this.timeout(4000);
 	it('Should be able to run jspm bundle to compile and bundle a less file', function (done) {
 		fs.exists(pathbundlesfx, function (exists) {
 			if (exists) {
@@ -39,12 +42,13 @@ describe('Bundle SFX less file', function () {
 
 			jspm.bundleSFX(pathexample, pathbundlesfx, {
 				minify: false,
-				sourceMaps: false,
+				sourceMaps: true,
 				format: 'cjs'
 			}).then(function () {
 				done();
 			}).catch(function (err) {
 				console.error('Bundle falla');
+				console.trace(err);
 				throw err;
 			});
 		});
