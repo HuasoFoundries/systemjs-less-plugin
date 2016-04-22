@@ -1,9 +1,9 @@
 {
-  "name": "less",
+  "name": "systemjs-less-plugin",
   "version": "1.7.0",
   "description": "Loads less files on the fly, and compiles then at build time",
   "main": "less.js",
-  "registry": "npm",
+  "registry": "github",
   "scripts": {
     "test": "make test"
   },
@@ -26,21 +26,22 @@
   "devDependencies": {
     "babel-eslint": "^5.0.0-beta6",
     "eslint": "^1.10.3",
+    "graceful-fs": "^4.1.3",
+    "image-size": "^0.5.0",
     "jspm": "^0.17.0-beta.13",
-    "mocha": "^2.4.5"
-  },
-  "optionalDependencies": {
     "less": "^2.6.1",
-    "source-map": "^0.5.3"
+    "mime": "^1.3.4",
+    "mocha": "^2.4.5",
+    "source-map": "^0.5.4"
   },
   "jspm": {
     "directories": {
       "lib": "src"
     },
     "registry": "github",
-    "dependencies": {
+    "dependencies": {},
+    "devDependencies": {
       "lessjs": "less/less.js@^2.6.1"
-    },
-    "devDependencies": {}
+    }
   }
 }

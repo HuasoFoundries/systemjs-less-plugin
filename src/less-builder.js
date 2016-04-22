@@ -1,7 +1,7 @@
 var isWindows = typeof process !== 'undefined' && process.platform && process.platform.match(/^win/),
 	fs = System._nodeRequire('fs'),
 	path = System._nodeRequire('path'),
-	lessRuntimePath = System.normalizeSync('lessjs/lib/less-node/index.js', module.id);
+	lessRuntimePath = System.normalizeSync('./less.node.js', module.id);
 
 function escape(source) {
 	return source
@@ -81,27 +81,25 @@ exports.bundle = function (loads, compileOpts, outputOpts) {
 			}
 		},
 		getLess = function () {
-			var less;
+
+
 			try {
-				less = loader._nodeRequire('less');
-				less.required_from_node = true;
-			} catch (err_less_node) {
-				console.log('less not installed as node_module, will search in jspm_packages');
-
-				try {
-					less = loader._nodeRequire(lessRuntimePath.substr(isWindows ? 8 : 7));
-					less.required_from_node = false;
-				} catch (errjspm) {
-					console.trace(errjspm);
-					throw new Error('Install LESS via `npm install less --save-dev` for LESS build support');
-				}
-
-			} finally {
+				var less = loader._nodeRequire(lessRuntimePath.substr(isWindows ? 8 : 7));
 				return less;
+			} catch (errjspm) {
+				console.error(errjspm.stack);
+				throw new Error('Install LESS via `npm install less --save-dev` for LESS build support');
 			}
+
 		};
 
 	var less = getLess();
+
+	var getBuilder = function (loader) {
+		return loader.import('./less.node.js', {
+			name: module.id
+		});
+	};
 
 
 	if (outputOpts.sourceMaps && !less.required_from_node && areSourceMapSupported() === false) {
@@ -113,23 +111,24 @@ exports.bundle = function (loads, compileOpts, outputOpts) {
 		sourceMap: outputOpts.sourceMaps
 	};
 	console.log('renderOpts', renderOpts);
-	return less.render(lessOutput, renderOpts)
-		.then(function (data) {
-			var cssOutput = data.css;
-			// write a separate CSS file if necessary
-			if (loader.separateCSS) {
-				if (outputOpts.sourceMaps) {
-					fs.writeFileSync(outFile + '.map', data.map.toString());
-					cssOutput += '/*# sourceMappingURL=' + outFile.split(/[\\/]/).pop() + '.map*/';
-				}
-				fs.writeFileSync(outFile, cssOutput);
-				return stubDefines;
+	return getBuilder(_this).then(function (less) {
+		return less.render(lessOutput, renderOpts);
+	}).then(function (data) {
+		var cssOutput = data.css;
+		// write a separate CSS file if necessary
+		if (loader.separateCSS) {
+			if (outputOpts.sourceMaps) {
+				fs.writeFileSync(outFile + '.map', data.map.toString());
+				cssOutput += '/*# sourceMappingURL=' + outFile.split(/[\\/]/).pop() + '.map*/';
 			}
+			fs.writeFileSync(outFile, cssOutput);
+			return stubDefines;
+		}
 
-			return [stubDefines, cssInject, '("' + escape(cssOutput) + '");'].join('\n');
-		}).catch(function (e) {
-			console.trace(e);
-		});
+		return [stubDefines, cssInject, '("' + escape(cssOutput) + '");'].join('\n');
+	}).catch(function (e) {
+		console.trace(e);
+	});
 
 
 };
