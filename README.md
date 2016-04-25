@@ -16,13 +16,8 @@ You can also install it from npm:
 jspm install less=npm:systemjs-less-plugin
 ```
 
-**Starting from version 1.5**, instead of using:
-1. `github:distros/less.js` to translate less in the browser
-2. `less` (installed as a node module) to compile in the server
-
-From now on, **this plugin's one and only dependency** is `github:less/less.js` for both tasks. 
-
-What we're actually doing is use `System._nodeRequire` to treat less as if it was installed as a node module.
+**Starting from version 1.8** this plugin has no dependencies. Instead, we're bundling 
+precompiled lessjs versions for the browser and for node.
 
 
 
