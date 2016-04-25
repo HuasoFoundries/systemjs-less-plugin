@@ -3,7 +3,7 @@
   "version": "1.7.0",
   "description": "Loads less files on the fly, and compiles then at build time",
   "main": "less",
-  "registry": "npm",
+  "registry": "github",
   "scripts": {
     "test": "make test"
   },
