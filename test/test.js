@@ -16,7 +16,7 @@ describe('Bundle less file', function () {
 
 			jspm.bundle(pathexample, pathbundle, {
 				minify: false,
-				sourceMaps: false
+				sourceMaps: true
 			}).then(function () {
 				done();
 			}).catch(function (err) {

@@ -1,7 +1,7 @@
 var isWindows = typeof process !== 'undefined' && process.platform && process.platform.match(/^win/),
 	fs = System._nodeRequire('fs'),
 	path = System._nodeRequire('path'),
-	lessRuntimePath = System.normalizeSync('lessjs/lib/less-node/index.js', module.id);
+	lessBundlePath = System.normalizeSync('./lessjs/less.node.js', module.id);
 
 function escape(source) {
 	return source
@@ -68,52 +68,13 @@ exports.bundle = function (loads, compileOpts, outputOpts) {
 			return sourceA + sourceB;
 		}, '');
 
-	var areSourceMapSupported = function () {
-			var source_maps_supported = false;
-			try {
-				var source_maps = loader._nodeRequire('source-map');
-				source_maps_supported = true;
-			} catch (e) {
-				// If you don't have source-map installed as a node module, just override the output option
-
-			} finally {
-				return source_maps_supported;
-			}
-		},
-		getLess = function () {
-			var less;
-			try {
-				less = loader._nodeRequire('less');
-				less.required_from_node = true;
-			} catch (err_less_node) {
-				console.log('less not installed as node_module, will search in jspm_packages');
-
-				try {
-					less = loader._nodeRequire(lessRuntimePath.substr(isWindows ? 8 : 7));
-					less.required_from_node = false;
-				} catch (errjspm) {
-					console.trace(errjspm);
-					throw new Error('Install LESS via `npm install less --save-dev` for LESS build support');
-				}
-
-			} finally {
-				return less;
-			}
-		};
-
-	var less = getLess();
+	var less = loader._nodeRequire(lessBundlePath.substr(isWindows ? 8 : 7)); //getLess();
 
 
-	if (outputOpts.sourceMaps && !less.required_from_node && areSourceMapSupported() === false) {
-		console.warn('Install source-map via `npm install source-map --save-dev` for source maps build support');
-		outputOpts.sourceMaps = false;
-	}
-	var renderOpts = {
-		compress: false,
-		sourceMap: outputOpts.sourceMaps
-	};
-	console.log('renderOpts', renderOpts);
-	return less.render(lessOutput, renderOpts)
+	return less.render(lessOutput, {
+			compress: false,
+			sourceMap: outputOpts.sourceMaps
+		})
 		.then(function (data) {
 			var cssOutput = data.css;
 			// write a separate CSS file if necessary
