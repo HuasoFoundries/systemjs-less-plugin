@@ -35,7 +35,7 @@ if (typeof window !== 'undefined') {
           }).then(function (data) {
             //inject it into the head as a style tag
             var style = document.createElement('style');
-            style.textContent = data.css;
+            style.textContent = data.css + '/*# sourceURL=' + url + '*/';
             style.setAttribute('type', 'text/css');
             //store original type in the data-type attribute
             style.setAttribute('data-type', 'text/less');
