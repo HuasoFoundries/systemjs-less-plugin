@@ -73,7 +73,9 @@ exports.bundle = function (loads, compileOpts, outputOpts) {
 
 	var outFile = loader.separateCSS ? outputOpts.outFile.replace(/\.js$/, '-from-less.css') : rootURL;
 
-	var lessOutput = rewriteURLs(loads, rootURL).map(function (load) {return load.source;}).join('');
+	var lessOutput = rewriteURLs(loads, rootURL).map(function (load) {
+		return load.source;
+	}).join('');
 
 	var less = getLess(loader);
 
