@@ -1,6 +1,6 @@
 {
   "name": "systemjs-less-plugin",
-  "version": "1.8.1",
+  "version": "1.8.2",
   "description": "Loads less files on the fly, and compiles then at build time",
   "main": "less",
   "registry": "github",
@@ -24,12 +24,11 @@
   },
   "homepage": "https://github.com/HuasoFoundries/systemjs-less-plugin#readme",
   "devDependencies": {
-    "babel-eslint": "^5.0.0-beta6",
-    "eslint": "^1.10.3",
+    "babel-eslint": "^6.1.0",
+    "eslint": "^3.0.1",
     "jspm": "^0.16.27",
     "mocha": "^2.4.5"
   },
-
   "jspm": {
     "registry": "github",
     "dependencies": {},

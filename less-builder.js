@@ -115,18 +115,18 @@ exports.listAssets = function (loads, compileOpts, outputOpts) {
 
 	return Promise.all(lessOutput.map(function (load) {
 		return less.render(load.source, {
-			compress: false,
-			sourceMap: outputOpts.sourceMaps
-		})
-		.then(function (data) {
-			return {
-				url: load.address,
-				source: data.css,
-				sourceMap: outputOpts.sourceMaps ? data.map.toString() : null,
-				type: 'css'
-			};
-		}).catch(function (e) {
-			console.trace(e);
-		});
+				compress: false,
+				sourceMap: outputOpts.sourceMaps
+			})
+			.then(function (data) {
+				return {
+					url: load.address,
+					source: data.css,
+					sourceMap: outputOpts.sourceMaps ? data.map.toString() : null,
+					type: 'css'
+				};
+			}).catch(function (e) {
+				console.trace(e);
+			});
 	}));
 };

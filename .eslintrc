@@ -94,7 +94,6 @@
         "no-caller": 2, // disallow use of arguments.caller or arguments.callee
         "no-div-regex": 2, // disallow division operators explicitly at beginning of regular expression (off by default)
         "no-else-return": 0, // disallow else after a return in an if (off by default)
-        "no-empty-label": 2, // disallow use of labels for anything other then loops and switches
         "no-eq-null": 2, // disallow comparisons to null without a type-checking operator (off by default)
         "no-eval": 2, // disallow use of eval()
         "no-extend-native": 2, // disallow adding to native types
@@ -210,7 +209,7 @@
             "after": true
         }], // enforce spacing before and after semicolons
         "sort-vars": 0, // sort variables within the same declaration block (off by default)
-        "space-after-keywords": [1, "always"], // require a space after certain keywords (off by default)
+        "keyword-spacing": [1, "always"], // require a space after certain keywords (off by default)
         "space-before-blocks": [1, "always"], // require or disallow space before blocks (off by default)
         "space-before-function-paren": [1, {
             "anonymous": "always",
