@@ -29,6 +29,29 @@ function fromFileURL(address) {
 	return address;
 }
 
+function rewriteURLs(loads, rootURL) {
+	var importRegex = /@import\s+["']([^"']+)["'];/g;
+	var urlRegex = /url\(["']?([^"']+)["']?\)/g;
+	return loads.map(function (load) {
+		var loadAddress = fromFileURL(load.address);
+		var loadDirname = path.dirname(loadAddress);
+		var relativeLoadDirname = loadDirname.replace(rootURL, "");
+		return Object.assign({}, load, {
+			source: load.source
+				.replace(importRegex, function (match, importUrl) {
+					return match.replace(importUrl, loadDirname + "/" + importUrl);
+				})
+				.replace(urlRegex, function (match, url) {
+					return match.replace(url, relativeLoadDirname + "/" + url);
+				})
+		});
+	});
+}
+
+function getLess(loader) {
+	return loader._nodeRequire(lessBundlePath.substr(isWindows ? 8 : 7)); //getLess();
+}
+
 var cssInject = [
 	"(function(c){var d=document,a='appendChild',i='styleSheet',s=d.createElement('style')",
 	"s.type='text/css'",
@@ -50,25 +73,11 @@ exports.bundle = function (loads, compileOpts, outputOpts) {
 
 	var outFile = loader.separateCSS ? outputOpts.outFile.replace(/\.js$/, '-from-less.css') : rootURL;
 
-	var importRegex = /@import\s+["']([^"']+)["'];/g;
-	var urlRegex = /url\(["']?([^"']+)["']?\)/g;
-	var lessOutput = loads.map(function (load) {
-			var loadAddress = fromFileURL(load.address);
-			var loadDirname = path.dirname(loadAddress);
-			var relativeLoadDirname = loadDirname.replace(rootURL, "");
-			return load.source
-				.replace(importRegex, function (match, importUrl) {
-					return match.replace(importUrl, loadDirname + "/" + importUrl);
-				})
-				.replace(urlRegex, function (match, url) {
-					return match.replace(url, relativeLoadDirname + "/" + url);
-				});
-		})
-		.reduce(function (sourceA, sourceB) {
-			return sourceA + sourceB;
-		}, '');
+	var lessOutput = rewriteURLs(loads, rootURL).map(function (load) {
+		return load.source;
+	}).join('');
 
-	var less = loader._nodeRequire(lessBundlePath.substr(isWindows ? 8 : 7)); //getLess();
+	var less = getLess(loader);
 
 
 	return less.render(lessOutput, {
@@ -93,4 +102,31 @@ exports.bundle = function (loads, compileOpts, outputOpts) {
 		});
 
 
+};
+
+exports.listAssets = function (loads, compileOpts, outputOpts) {
+	var loader = this;
+	outputOpts = outputOpts || compileOpts;
+
+	var rootURL = loader.rootURL || fromFileURL(loader.baseURL),
+		lessOutput = rewriteURLs(loads, rootURL);
+
+	var less = getLess(loader);
+
+	return Promise.all(lessOutput.map(function (load) {
+		return less.render(load.source, {
+			compress: false,
+			sourceMap: outputOpts.sourceMaps
+		})
+		.then(function (data) {
+			return {
+				url: load.address,
+				source: data.css,
+				sourceMap: outputOpts.sourceMaps ? data.map.toString() : null,
+				type: 'css'
+			};
+		}).catch(function (e) {
+			console.trace(e);
+		});
+	}));
 };

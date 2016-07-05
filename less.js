@@ -98,4 +98,12 @@ if (typeof window !== 'undefined') {
         return builder.bundle.call(_this, loads, opts);
       });
   };
+
+  exports.listAssets = function (loads, compileOpts, outputOpts) {
+    var _this = this;
+    return getBuilder(_this)
+      .then(function (builder) {
+        return builder.listAssets.call(_this, loads, compileOpts, outputOpts);
+      });
+  };
 }
