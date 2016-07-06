@@ -7,14 +7,10 @@ Translates less on the browser, inlines CSS conversion during build.
 To use this plugin, install it with jspm like so:
 
 ```sh
-jspm install less=github:huasofoundries/systemjs-less-plugin
-````
-
-You can also install it from npm:
-
-```sh
 jspm install less=npm:systemjs-less-plugin
 ```
+
+
 
 **Starting from version 1.8** this plugin has no dependencies. Instead, we're bundling 
 precompiled lessjs versions for the browser and for node.

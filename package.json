@@ -1,6 +1,6 @@
 {
   "name": "systemjs-less-plugin",
-  "version": "1.8.2",
+  "version": "1.8.3",
   "description": "Loads less files on the fly, and compiles then at build time",
   "main": "less",
   "registry": "github",
@@ -30,8 +30,6 @@
     "mocha": "^2.4.5"
   },
   "jspm": {
-    "registry": "github",
-    "dependencies": {},
     "devDependencies": {}
   }
 }
