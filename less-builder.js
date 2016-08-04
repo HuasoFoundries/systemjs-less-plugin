@@ -78,10 +78,10 @@ exports.bundle = function (loads, compileOpts, outputOpts) {
 	}).join('');
 
 	var less = getLess(loader);
-  var lessOptions = Object.assign({
-			compress: false,
-			sourceMap: outputOpts.sourceMaps
-		}, loader.lessOptions || {});
+	var lessOptions = Object.assign({
+		compress: false,
+		sourceMap: outputOpts.sourceMaps
+	}, loader.lessOptions || {});
 
 	return less.render(lessOutput, lessOptions)
 		.then(function (data) {
@@ -112,10 +112,10 @@ exports.listAssets = function (loads, compileOpts, outputOpts) {
 		lessOutput = rewriteURLs(loads, rootURL);
 
 	var less = getLess(loader);
-  var lessOptions = Object.assign({
-			compress: false,
-			sourceMap: outputOpts.sourceMaps
-		}, loader.lessOptions || {});
+	var lessOptions = Object.assign({
+		compress: false,
+		sourceMap: outputOpts.sourceMaps
+	}, loader.lessOptions || {});
 
 	return Promise.all(lessOutput.map(function (load) {
 		return less.render(load.source, lessOptions)
