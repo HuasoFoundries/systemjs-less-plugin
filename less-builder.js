@@ -78,17 +78,17 @@ exports.bundle = function (loads, compileOpts, outputOpts) {
 	}).join('');
 
 	var less = getLess(loader);
-
-
-	return less.render(lessOutput, {
+  var lessOptions = Object.assign({
 			compress: false,
 			sourceMap: outputOpts.sourceMaps
-		})
+		}, loader.lessOptions || {});
+
+	return less.render(lessOutput, lessOptions)
 		.then(function (data) {
 			var cssOutput = data.css;
 			// write a separate CSS file if necessary
 			if (loader.separateCSS) {
-				if (outputOpts.sourceMaps) {
+				if (lessOptions.sourceMaps) {
 					fs.writeFileSync(outFile + '.map', data.map.toString());
 					cssOutput += '/*# sourceMappingURL=' + outFile.split(/[\\/]/).pop() + '.map*/';
 				}
@@ -112,17 +112,18 @@ exports.listAssets = function (loads, compileOpts, outputOpts) {
 		lessOutput = rewriteURLs(loads, rootURL);
 
 	var less = getLess(loader);
+  var lessOptions = Object.assign({
+			compress: false,
+			sourceMap: outputOpts.sourceMaps
+		}, loader.lessOptions || {});
 
 	return Promise.all(lessOutput.map(function (load) {
-		return less.render(load.source, {
-				compress: false,
-				sourceMap: outputOpts.sourceMaps
-			})
+		return less.render(load.source, lessOptions)
 			.then(function (data) {
 				return {
 					url: load.address,
 					source: data.css,
-					sourceMap: outputOpts.sourceMaps ? data.map.toString() : null,
+					sourceMap: lessOptions.sourceMaps ? data.map.toString() : null,
 					type: 'css'
 				};
 			}).catch(function (e) {
