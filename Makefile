@@ -13,6 +13,14 @@ install:
 	npm install
 	jspm install
 
+build_node:
+	cd less-bundle && jspm build less ../lessjs/less.node.js --node  --minify
+
+build_browser:
+	cd less-bundle && jspm build less/dist/less.js ../lessjs/less.browser.js  --minify
+
+build: build_node build_browser	
+
 test:
 	./node_modules/.bin/mocha 
 

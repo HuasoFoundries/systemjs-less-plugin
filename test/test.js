@@ -47,7 +47,7 @@ describe('Bundle SFX less file', function () {
 			}).then(function () {
 				done();
 			}).catch(function (err) {
-				console.error('Bundle falla');
+				console.error('Bundle fails');
 				console.trace(err);
 				throw err;
 			});

@@ -1,0 +1,77 @@
+{
+  "name": "less-bundle",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jspm": "^0.17.0-beta.32"
+  },
+  "jspm": {
+    "name": "less-bundle",
+    "main": "less-bundle.js",
+    "dependencies": {
+      "less": "npm:less@^2.6.1"
+    },
+    "peerDependencies": {
+      "assert": "npm:jspm-nodelibs-assert@^0.2.0",
+      "buffer": "npm:jspm-nodelibs-buffer@^0.2.0",
+      "child_process": "npm:jspm-nodelibs-child_process@^0.2.0",
+      "constants": "npm:jspm-nodelibs-constants@^0.2.0",
+      "crypto": "npm:jspm-nodelibs-crypto@^0.2.0",
+      "dgram": "npm:jspm-nodelibs-dgram@^0.2.0",
+      "dns": "npm:jspm-nodelibs-dns@^0.2.0",
+      "domain": "npm:jspm-nodelibs-domain@^0.2.0",
+      "ecc-jsbn": "npm:ecc-jsbn@~0.0.1",
+      "errno": "npm:errno@^0.1.1",
+      "events": "npm:jspm-nodelibs-events@^0.2.0",
+      "fs": "npm:jspm-nodelibs-fs@^0.2.0",
+      "graceful-fs": "npm:graceful-fs@^4.1.2",
+      "http": "github:jspm/nodelibs-http@^0.2.0-alpha",
+      "https": "npm:jspm-nodelibs-https@^0.2.0",
+      "image-size": "npm:image-size@0.4",
+      "jodid25519": "npm:jodid25519@^1.0.0",
+      "jsbn": "npm:jsbn@0.1",
+      "mime": "npm:mime@^1.2.11",
+      "mkdirp": "npm:mkdirp@^0.5.0",
+      "net": "npm:jspm-nodelibs-net@^0.2.0",
+      "os": "npm:jspm-nodelibs-os@^0.2.0",
+      "path": "npm:jspm-nodelibs-path@^0.2.0",
+      "process": "github:jspm/nodelibs-process@^0.2.0-alpha",
+      "promise": "npm:promise@^7.1.1",
+      "punycode": "npm:jspm-nodelibs-punycode@^0.2.0",
+      "querystring": "npm:jspm-nodelibs-querystring@^0.2.0",
+      "request": "npm:request@^2.51.0",
+      "source-map": "npm:source-map@^0.5.3",
+      "stream": "npm:jspm-nodelibs-stream@^0.2.0",
+      "string_decoder": "npm:jspm-nodelibs-string_decoder@^0.2.0",
+      "tls": "npm:jspm-nodelibs-tls@^0.2.0",
+      "tty": "npm:jspm-nodelibs-tty@^0.2.0",
+      "tweetnacl": "npm:tweetnacl@^0.14.3",
+      "url": "npm:jspm-nodelibs-url@^0.2.0",
+      "util": "npm:jspm-nodelibs-util@^0.2.0",
+      "vm": "npm:jspm-nodelibs-vm@^0.2.0",
+      "zlib": "npm:jspm-nodelibs-zlib@^0.2.0"
+    },
+    "overrides": {
+      "npm:browserify-zlib@0.1.4": {
+        "dependencies": {
+          "readable-stream": "^2.0.2",
+          "pako": "~0.2.0"
+        },
+        "map": {
+          "_stream_transform": "readable-stream/transform"
+        }
+      },
+      "npm:inherits@2.0.1": {
+        "ignore": [
+          "test.js"
+        ]
+      }
+    }
+  }
+}
