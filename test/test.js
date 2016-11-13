@@ -1,7 +1,9 @@
 var assert = require('assert'),
-	jspm = require('jspm'),
+	Builder = require('jspm').Builder,
+	builder = new Builder(),
+
 	fs = require('fs'),
-	pathexample = 'example/example.less!',
+	pathexample = 'example/example.less',
 	pathbundle = 'example/example.js',
 	pathbundlesfx = 'example/example_sfx.js';
 
@@ -14,7 +16,7 @@ describe('Bundle less file', function () {
 				fs.unlinkSync(pathbundle);
 			}
 
-			jspm.bundle(pathexample, pathbundle, {
+			builder.bundle(pathexample, pathbundle, {
 				minify: false,
 				sourceMaps: true
 			}).then(function () {
@@ -32,22 +34,22 @@ describe('Bundle less file', function () {
 });
 
 
-describe('Bundle SFX less file', function () {
+describe('Static build less file', function () {
 	this.timeout(4000);
-	it('Should be able to run jspm bundle to compile and bundle a less file', function (done) {
+	it('Should be able to run jspm build to compile and bundle a less file', function (done) {
 		fs.exists(pathbundlesfx, function (exists) {
 			if (exists) {
 				fs.unlinkSync(pathbundlesfx);
 			}
 
-			jspm.bundleSFX(pathexample, pathbundlesfx, {
+			builder.buildStatic(pathexample, pathbundlesfx, {
 				minify: false,
 				sourceMaps: true,
 				format: 'cjs'
 			}).then(function () {
 				done();
 			}).catch(function (err) {
-				console.error('Bundle falla');
+				console.error('Bundle fails');
 				console.trace(err);
 				throw err;
 			});

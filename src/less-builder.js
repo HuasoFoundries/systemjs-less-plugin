@@ -1,7 +1,7 @@
 var isWindows = typeof process !== 'undefined' && process.platform && process.platform.match(/^win/),
 	fs = System._nodeRequire('fs'),
 	path = System._nodeRequire('path'),
-	lessBundlePath = System.normalizeSync('./lessjs/less.node.js', module.id);
+	lessBundlePath = System.normalizeSync('./less.node.js', module.id);
 
 function escape(source) {
 	return source
