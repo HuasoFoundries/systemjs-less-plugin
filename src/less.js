@@ -67,7 +67,7 @@ if (typeof window !== 'undefined') {
       }
     }
     //var less_browser = require('less.js');
-    return this.import('./lessjs/less.browser.js', {
+    return this.import('./less.browser.js', {
       name: module.id
     }).then(function (less_browser) {
       return loadStyle(load.address, less_browser);

@@ -20,11 +20,11 @@ handlers.tiff = require('image-size/lib/types/tiff');
 handlers.webp = require('image-size/lib/types/webp');
 
 // load all available handlers
-types.forEach(function(type) {
+types.forEach(function (type) {
     typeMap[type] = handlers[type].detect;
 });
 
-var detector = function(buffer, filepath) {
+var detector = function (buffer, filepath) {
     var type, result;
     for (type in typeMap) {
         result = typeMap[type](buffer, filepath);
@@ -58,7 +58,7 @@ function lookup(buffer, filepath) {
 
 function asyncFileToBuffer(filepath, callback) {
     // open the file in read only mode
-    fs.open(filepath, 'r', function(err, descriptor) {
+    fs.open(filepath, 'r', function (err, descriptor) {
         if (err) {
             return callback(err);
         }
@@ -66,12 +66,12 @@ function asyncFileToBuffer(filepath, callback) {
         var bufferSize = Math.min(size, MaxBufferSize);
         var buffer = new Buffer(bufferSize);
         // read first buffer block from the file, asynchronously
-        fs.read(descriptor, buffer, 0, bufferSize, 0, function(err) {
+        fs.read(descriptor, buffer, 0, bufferSize, 0, function (err) {
             if (err) {
                 return callback(err);
             }
             // close the file, we are done
-            fs.close(descriptor, function(err) {
+            fs.close(descriptor, function (err) {
                 callback(err, buffer);
             });
         });
@@ -93,7 +93,7 @@ function syncFileToBuffer(filepath) {
  * @params input - buffer or relative/absolute path of the image file
  * @params callback - optional function for async detection
  */
-module.exports = function(input, callback) {
+module.exports = function (input, callback) {
 
     // Handle buffer input
     if (Buffer.isBuffer(input)) {
@@ -109,7 +109,7 @@ module.exports = function(input, callback) {
     var filepath = path.resolve(input);
 
     if (typeof callback === 'function') {
-        asyncFileToBuffer(filepath, function(err, buffer) {
+        asyncFileToBuffer(filepath, function (err, buffer) {
             if (err) {
                 return callback(err);
             }

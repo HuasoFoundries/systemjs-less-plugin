@@ -2,7 +2,7 @@
   "name": "systemjs-less-plugin",
   "version": "1.8.4",
   "description": "Loads less files on the fly, and compiles then at build time",
-  "main": "less",
+  "main": "less.js",
   "registry": "github",
   "scripts": {
     "test": "make test"
@@ -26,13 +26,118 @@
   "devDependencies": {
     "babel-eslint": "^6.1.0",
     "eslint": "^3.0.1",
-    "jspm": "^0.16.27",
     "mocha": "^2.4.5"
   },
   "jspm": {
-    "devDependencies": {}
+    "main": "less.js",
+    "directories": {
+      "lib": "src"
+    },
+    "dependencies": {},
+    "devDependencies": {
+      "assert": "npm:jspm-nodelibs-assert@^0.2.0",
+      "bcrypt-pbkdf": "npm:bcrypt-pbkdf@^1.0.0",
+      "buffer": "npm:jspm-nodelibs-buffer@^0.2.0",
+      "child_process": "npm:jspm-nodelibs-child_process@^0.2.0",
+      "constants": "npm:jspm-nodelibs-constants@^0.2.0",
+      "crypto": "npm:jspm-nodelibs-crypto@^0.2.0",
+      "dgram": "npm:jspm-nodelibs-dgram@^0.2.0",
+      "dns": "npm:jspm-nodelibs-dns@^0.2.0",
+      "domain": "npm:jspm-nodelibs-domain@^0.2.0",
+      "ecc-jsbn": "npm:ecc-jsbn@~0.1.1",
+      "errno": "npm:errno@^0.1.1",
+      "events": "npm:jspm-nodelibs-events@^0.2.0",
+      "fs": "npm:jspm-nodelibs-fs@^0.2.0",
+      "graceful-fs": "npm:graceful-fs@^4.1.2",
+      "http": "npm:jspm-nodelibs-http@^0.2.0",
+      "https": "npm:jspm-nodelibs-https@^0.2.0",
+      "image-size": "npm:image-size@0.5",
+      "jodid25519": "npm:jodid25519@^1.0.0",
+      "jsbn": "npm:jsbn@0.1",
+      "lessjs": "npm:less@^2.7.1",
+      "mime": "npm:mime@^1.2.11",
+      "mkdirp": "npm:mkdirp@^0.5.0",
+      "net": "npm:jspm-nodelibs-net@^0.2.0",
+      "os": "npm:jspm-nodelibs-os@^0.2.0",
+      "path": "npm:jspm-nodelibs-path@^0.2.0",
+      "plugin-babel": "npm:systemjs-plugin-babel@^0.0.17",
+      "process": "npm:jspm-nodelibs-process@^0.2.0",
+      "promise": "npm:promise@^7.1.1",
+      "querystring": "npm:jspm-nodelibs-querystring@^0.2.0",
+      "request": "npm:request@^2.78.0",
+      "source-map": "npm:source-map@^0.5.3",
+      "stream": "npm:jspm-nodelibs-stream@^0.2.0",
+      "string_decoder": "npm:jspm-nodelibs-string_decoder@^0.2.0",
+      "tls": "npm:jspm-nodelibs-tls@^0.2.0",
+      "tty": "npm:jspm-nodelibs-tty@^0.2.0",
+      "tweetnacl": "npm:tweetnacl@0.14",
+      "url": "npm:jspm-nodelibs-url@^0.2.0",
+      "util": "npm:jspm-nodelibs-util@^0.2.0",
+      "vm": "npm:jspm-nodelibs-vm@^0.2.0",
+      "zlib": "npm:jspm-nodelibs-zlib@^0.2.0"
+    },
+    "overrides": {
+      "npm:browserify-zlib@0.1.4": {
+        "dependencies": {
+          "readable-stream": "^2.0.2",
+          "pako": "~0.2.0"
+        },
+        "map": {
+          "_stream_transform": "readable-stream/transform"
+        }
+      },
+      "npm:inherits@2.0.3": {
+        "ignore": [
+          "test.js"
+        ]
+      },
+      "npm:less@2.7.1": {
+        "main": "index.js",
+        "format": "cjs",
+        "meta": {
+          "*": {
+            "globals": {
+              "process": "process"
+            }
+          },
+          "*.json": {
+            "format": "json"
+          },
+          "dist/less.js": {
+            "cjsRequireDetection": false
+          },
+          "lib/less-node/environment.js": {
+            "globals": {
+              "Buffer": "buffer/global"
+            }
+          },
+          "test/copy-bom.js": {
+            "globals": {
+              "Buffer": "buffer/global"
+            }
+          }
+        },
+        "map": {
+          "./index": "./index.js",
+          "image-size": "imagesize.js",
+          "./lib/less": "./lib/less/index.js",
+          "./lib/less-browser": "./lib/less-browser/index.js",
+          "./lib/less-node": "./lib/less-node/index.js",
+          "./lib/less-rhino": "./lib/less-rhino/index.js",
+          "./lib/less/data": "./lib/less/data/index.js",
+          "./lib/less/functions": "./lib/less/functions/index.js",
+          "./lib/less/tree": "./lib/less/tree/index.js",
+          "./lib/less/visitors": "./lib/less/visitors/index.js",
+          "./test": "./test/index.js",
+          "./test/plugins/filemanager": "./test/plugins/filemanager/index.js",
+          "./test/plugins/postprocess": "./test/plugins/postprocess/index.js",
+          "./test/plugins/preprocess": "./test/plugins/preprocess/index.js",
+          "./test/plugins/visitor": "./test/plugins/visitor/index.js"
+        }
+      }
+    }
   },
   "dependencies": {
-    "jspm": "^0.16.48"
+    "jspm": "^0.17.0-beta.32"
   }
 }
