@@ -58,6 +58,37 @@ describe('Static build less file', function () {
 	});
 });
 
+describe('Compile url(filename) correctly', function () {
+	it('should compile url(data:...) property correctly', function () {
+		builder.bundle(pathexample, {
+				minify: false,
+				sourceMaps: true,
+				format: 'cjs'
+			}).then(function (file) {
+				assert.ok(/url\(example\/file.png\)/.test(file.source));
+			}).catch(function (err) {
+				assert.ok(false);
+			});
+	});
+});
+
+
+describe('Compile url(data:...) correctly', function () {
+	it('should compile url(data:...) property correctly', function () {
+		builder.bundle(pathexample, {
+				minify: false,
+				sourceMaps: true,
+				format: 'cjs'
+			}).then(function (file) {
+				assert.ok(/url\(data:image\/png;base64.*\)/.test(file.source));
+				//assert.ok(/url\("data:image\/png;base64.*"\)/.test(file.source));
+				assert.ok(/url\('data:image\/png;base64.*'\)/.test(file.source));
+			}).catch(function (err) {
+				assert.ok(false);
+			});
+	});
+});
+
 
 describe('Compile styles correctly', function () {
 	this.timeout(2000);
@@ -105,3 +136,4 @@ describe('Compile styles correctly in bundle sfx', function () {
 	});
 
 });
+
