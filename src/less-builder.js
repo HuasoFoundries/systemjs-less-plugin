@@ -28,10 +28,9 @@ function fromFileURL(address) {
 
 	return address;
 }
-
 function rewriteURLs(loads, rootURL) {
 	var importRegex = /@import\s+["']([^"']+)["'];/g;
-	var urlRegex = /url\(["']?([^"']+)["']?\)/g;
+	var urlRegex = /url\(["'\s]?([^"'\)]+)["']?\)/g;
 	return loads.map(function (load) {
 		var loadAddress = fromFileURL(load.address);
 		var loadDirname = path.dirname(loadAddress);
@@ -42,7 +41,11 @@ function rewriteURLs(loads, rootURL) {
 					return match.replace(importUrl, loadDirname + "/" + importUrl);
 				})
 				.replace(urlRegex, function (match, url) {
-					return match.replace(url, relativeLoadDirname + "/" + url);
+					if(url.indexOf("data:") !== 0) {
+					  return match.replace(url, relativeLoadDirname + "/" + url);
+					} else {
+						return match;
+					}
 				})
 		});
 	});
