@@ -61,14 +61,14 @@ describe('Static build less file', function () {
 describe('Compile url(filename) correctly', function () {
 	it('should compile url(data:...) property correctly', function () {
 		builder.bundle(pathexample, {
-				minify: false,
-				sourceMaps: true,
-				format: 'cjs'
-			}).then(function (file) {
-				assert.ok(/url\(example\/file.png\)/.test(file.source));
-			}).catch(function (err) {
-				assert.ok(false);
-			});
+			minify: false,
+			sourceMaps: true,
+			format: 'cjs'
+		}).then(function (file) {
+			assert.ok(/url\(example\/file.png\)/.test(file.source));
+		}).catch(function (err) {
+			assert.ok(false);
+		});
 	});
 });
 
@@ -76,16 +76,16 @@ describe('Compile url(filename) correctly', function () {
 describe('Compile url(data:...) correctly', function () {
 	it('should compile url(data:...) property correctly', function () {
 		builder.bundle(pathexample, {
-				minify: false,
-				sourceMaps: true,
-				format: 'cjs'
-			}).then(function (file) {
-				assert.ok(/url\(data:image\/png;base64.*\)/.test(file.source));
-				//assert.ok(/url\("data:image\/png;base64.*"\)/.test(file.source));
-				assert.ok(/url\('data:image\/png;base64.*'\)/.test(file.source));
-			}).catch(function (err) {
-				assert.ok(false);
-			});
+			minify: false,
+			sourceMaps: true,
+			format: 'cjs'
+		}).then(function (file) {
+			assert.ok(/url\(data:image\/png;base64.*\)/.test(file.source));
+			//assert.ok(/url\("data:image\/png;base64.*"\)/.test(file.source));
+			assert.ok(/url\('data:image\/png;base64.*'\)/.test(file.source));
+		}).catch(function (err) {
+			assert.ok(false);
+		});
 	});
 });
 
@@ -95,20 +95,20 @@ describe('Compile styles correctly', function () {
 
 	var code;
 
-	it('should compile -webkit-border-radius property correctly', function (done) {
+	it('Autoprefixer should remove -webkit-border-radius', function (done) {
 		setTimeout(function () {
 			code = code || fs.readFileSync(pathbundle);
-			assert.ok(/-webkit-border-radius:\s+20px/.test(code));
+			assert.ok(/-webkit-border-radius:20px/.test(code) === false);
 			done();
 		}, 100);
 	});
-	it('should compile -moz-border-radius property correctly', function () {
+	it('Autoprefixer should remove -moz-border-radius', function () {
 		code = code || fs.readFileSync(pathbundle);
-		assert.ok(/-moz-border-radius:\s+20px/.test(code));
+		assert.ok(/-moz-border-radius:20px/.test(code) === false);
 	});
 	it('should compile border-radius property correctly', function () {
 		code = code || fs.readFileSync(pathbundle);
-		assert.ok(/border-radius:\s+20px/.test(code));
+		assert.ok(/border-radius:20px/.test(code));
 	});
 
 });
@@ -119,21 +119,20 @@ describe('Compile styles correctly in bundle sfx', function () {
 
 	var code;
 
-	it('should compile -webkit-border-radius property correctly', function (done) {
+	it('Autoprefixer should remove -webkit-border-radius', function (done) {
 		setTimeout(function () {
 			code = code || fs.readFileSync(pathbundlesfx);
-			assert.ok(/-webkit-border-radius:\s+20px/.test(code));
+			assert.ok(/-webkit-border-radius:20px/.test(code) === false);
 			done();
 		}, 100);
 	});
-	it('should compile -moz-border-radius property correctly', function () {
+	it('Autoprefixer should remove -moz-border-radius', function () {
 		code = code || fs.readFileSync(pathbundlesfx);
-		assert.ok(/-moz-border-radius:\s+20px/.test(code));
+		assert.ok(/-moz-border-radius:20px/.test(code) === false);
 	});
 	it('should compile border-radius property correctly', function () {
 		code = code || fs.readFileSync(pathbundlesfx);
-		assert.ok(/border-radius:\s+20px/.test(code));
+		assert.ok(/border-radius:20px/.test(code));
 	});
 
 });
-
