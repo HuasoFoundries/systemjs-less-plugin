@@ -17,7 +17,7 @@ again, you don't need to worry about that, because it'll be installed along `sys
 To use this plugin, install it with jspm like so:
 
 ```sh
-jspm install less=npm:systemjs-less-plugin
+jspm install less
 ```
 
 Then, in your jspm.config file, add less as the loader for less files (duh!):
