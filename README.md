@@ -40,9 +40,9 @@ As such, system-less-plugin supports the same [build options](https://github.com
 
 Among other features, this includes source maps and generation of separate CSS files.
 
-## Import from jspm packages
+#### Import from jspm packages
 
-Adds the ability for less to import from jspm packages (thanks to @fernandogmar based on [lixiaoyan/less-plugin-jspm-import](https://github.com/lixiaoyan/less-plugin-jspm-import) )
+Adds the ability for less to import from jspm packages (thanks to [@fernandogmar](https://github.com/fernandogmar) based on [lixiaoyan/less-plugin-jspm-import](https://github.com/lixiaoyan/less-plugin-jspm-import) )
 
 In less file:
 
