@@ -1,13 +1,13 @@
 # systemjs-less-plugin
 
-Translates less on the browser, inlines CSS conversion during build. 
+Translates less on the browser, inlines CSS conversion during build.
 
 [![npm](https://img.shields.io/npm/dm/systemjs-less-plugin.svg?style=plastic)](https://www.npmjs.com/package/systemjs-less-plugin) [![Code Climate](https://codeclimate.com/github/HuasoFoundries/systemjs-less-plugin/badges/gpa.svg)](https://codeclimate.com/github/HuasoFoundries/systemjs-less-plugin) [![Travis CI](https://travis-ci.org/HuasoFoundries/systemjs-less-plugin.svg)](https://travis-ci.org/HuasoFoundries/systemjs-less-plugin)
 
 This SystemJS plugin provides in-browser compilation of less stylesheets to regular CSS styles,
 as well as precompilation at the build stage when bundling your project with JSPM.
 
-It depends (of course) on [{Less}](http://lesscss.org/) but you don't need to worry about it. 
+It depends (of course) on [{Less}](http://lesscss.org/) but you don't need to worry about it.
 We have it bundled along this loader plugin. It also depends on [plugin-css](https://github.com/systemjs/plugin-css) and,
 again, you don't need to worry about that, because it'll be installed along `system-less-plugin`.
 
@@ -40,6 +40,23 @@ As such, system-less-plugin supports the same [build options](https://github.com
 
 Among other features, this includes source maps and generation of separate CSS files.
 
+## Import from jspm packages
+
+Adds the ability for less to import from jspm packages (thanks to @fernandogmar based on [lixiaoyan/less-plugin-jspm-import](https://github.com/lixiaoyan/less-plugin-jspm-import) )
+
+In less file:
+
+```
+@import "jspm://packagename/path/to/file.less";
+```
+
+or if importing a css file an [import option](http://lesscss.org/features/#import-options) is required:
+
+```
+@import (less) "jspm://packagename/path/to/file.css";
+```
+
+
 
 #### In case npm is down...
 
@@ -56,5 +73,3 @@ License
 ---
 
 MIT
-
-
