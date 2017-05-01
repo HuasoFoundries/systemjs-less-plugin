@@ -1,5 +1,5 @@
 var path = require("path");
-var SystemJSLoader = System.constructor;
+//it requires SystemJS as loader
 
 
 function resolveURL(filename) {
@@ -11,7 +11,7 @@ exports.factory = function(less) {
     constructor(options) {
       super();
       this.options = options;
-      this.loader = new SystemJSLoader();
+      this.loader = System;
       this.loader.config({
         defaultJSExtensions: false
       });
