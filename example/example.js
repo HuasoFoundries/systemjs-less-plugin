@@ -1,5 +1,5 @@
 System.registerDynamic("example/example.less", [], false, function ($__require, $__exports, $__module) {
-  var _retrieveGlobal = System.get("@@global-helpers").prepareGlobal($__module.id, null, null);
+  var _retrieveGlobal = System.registry.get("@@global-helpers").prepareGlobal($__module.id, null, null);
 
   (function ($__global) {})(this);
 

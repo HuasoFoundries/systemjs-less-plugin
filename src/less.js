@@ -1,4 +1,5 @@
 var CSSPluginBase = require('css/css-plugin-base.js');
+var jspmLessPlugin = require('./jspm-less-plugin/index.js');
 
 var isWin = typeof process !== 'undefined' && process.platform.match(/^win/);
 
@@ -23,7 +24,10 @@ module.exports = new CSSPluginBase(function compile(style, address, opts) {
         relativeUrls: opts.relativeUrls || false,
         sourceMap: loader.builder && {
           sourceMapBasepath: filename.replace(/[^/]+$/, '')
-        }
+        },
+        plugins: [new jspmLessPlugin({
+            prefix: 'jspm://'
+        })]
       });
     })
     .then(function (output) {
