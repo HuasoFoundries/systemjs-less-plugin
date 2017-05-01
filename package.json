@@ -1,6 +1,6 @@
 {
   "name": "systemjs-less-plugin",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Loads less files on the fly, and compiles then at build time",
   "main": "less.js",
   "registry": "github",
