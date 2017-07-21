@@ -1,0 +1,89 @@
+@import 'jspm://example/mixin.less';
+@red: red;
+body {
+	.red();
+	background-color: @red;
+}
+
+@base: #663333;
+@complement1: spin(@base, 180);
+@complement2: darken(spin(@base, 180), 5%);
+@lighten1: lighten(@base, 15%);
+@lighten2: lighten(@base, 30%);
+.border-radius (@radius: 5px) {
+	-webkit-border-radius: @radius;
+	-moz-border-radius: @radius;
+	border-radius: @radius;
+}
+
+.transform (@rotate: 90deg, @scale: 1, @skew: 1deg, @translate: 10px) {
+	-webkit-transform: rotate(@rotate) scale(@scale) skew(@skew) translate(@translate);
+	-moz-transform: rotate(@rotate) scale(@scale) skew(@skew) translate(@translate);
+	-o-transform: rotate(@rotate) scale(@scale) skew(@skew) translate(@translate);
+	-ms-transform: rotate(@rotate) scale(@scale) skew(@skew) translate(@translate);
+	transform: rotate(@rotate) scale(@scale) skew(@skew) translate(@translate);
+}
+
+.url-noquote {
+	background-image: url(file.png)
+}
+
+.url-data-noquote {
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuNWWFMmUAAABISURBVDhPY2hoaPhPLgZrBgIGUvGoZihOTEzEGrIgcWR1IDGsNqMbgK4RhHFqBmGYAdg0gjBezSCMSyMIE9SMDw91zeThhv8Ami96gQcIp6MAAAAASUVORK5CYII=);
+}
+
+.url-data-quote {
+	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuNWWFMmUAAABISURBVDhPY2hoaPhPLgZrBgIGUvGoZihOTEzEGrIgcWR1IDGsNqMbgK4RhHFqBmGYAdg0gjBezSCMSyMIE9SMDw91zeThhv8Ami96gQcIp6MAAAAASUVORK5CYII=");
+}
+
+.url-data-single-quote {
+	background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuNWWFMmUAAABISURBVDhPY2hoaPhPLgZrBgIGUvGoZihOTEzEGrIgcWR1IDGsNqMbgK4RhHFqBmGYAdg0gjBezSCMSyMIE9SMDw91zeThhv8Ami96gQcIp6MAAAAASUVORK5CYII=');
+}
+
+.gradient (@origin: left,
+@start: #ffffff,
+@stop: #000000) {
+	background-color: @start;
+	background-image: -webkit-linear-gradient(@origin, @start, @stop);
+	background-image: -moz-linear-gradient(@origin, @start, @stop);
+	background-image: -o-linear-gradient(@origin, @start, @stop);
+	background-image: -ms-linear-gradient(@origin, @start, @stop);
+	background-image: linear-gradient(@origin, @start, @stop);
+}
+
+.one {
+	color: @base;
+}
+
+.two {
+	color: @complement1;
+}
+
+.three {
+	color: @complement2;
+}
+
+.four {
+	color: @lighten1;
+}
+
+.five {
+	color: @lighten2;
+}
+
+#someDiv {
+	.gradient(left,
+	#663333,
+	#333333);
+}
+
+.transformed {
+	.transform(5deg,
+	0.5,
+	1deg,
+	0px);
+}
+
+.roundbordered {
+	.border-radius(20px);
+}

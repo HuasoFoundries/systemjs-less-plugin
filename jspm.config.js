@@ -491,15 +491,17 @@ SystemJS.config({
     }
   },
   transpiler: "plugin-babel",
-  meta: {
-    "*.less": {
-      "loader": "less"
-    }
-  },
   packages: {
-    "less": {
-      "main": "less.js"
-    }
+  	"less": {
+  		"main": "less.js"
+  	},
+  	"example": {
+  		"meta": {
+  			"*.less": {
+  				"loader": "less"
+  			}
+  		}
+  	}
   }
 });
 
