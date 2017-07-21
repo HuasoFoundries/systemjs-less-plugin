@@ -26,3 +26,6 @@ bower_components
 jspm_packages
 fabfile*
 
+
+example/*.js
+example/*.js.map

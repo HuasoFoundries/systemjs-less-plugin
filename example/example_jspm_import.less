@@ -1,4 +1,4 @@
-@import './mixin.less';
+@import 'jspm://example/mixin.less';
 @red: red;
 body {
 	.red();
@@ -25,7 +25,7 @@ body {
 }
 
 .url-noquote {
-background-image: url(file.png)
+	background-image: url(file.png)
 }
 
 .url-data-noquote {
@@ -40,7 +40,9 @@ background-image: url(file.png)
 	background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuNWWFMmUAAABISURBVDhPY2hoaPhPLgZrBgIGUvGoZihOTEzEGrIgcWR1IDGsNqMbgK4RhHFqBmGYAdg0gjBezSCMSyMIE9SMDw91zeThhv8Ami96gQcIp6MAAAAASUVORK5CYII=');
 }
 
-.gradient (@origin: left, @start: #ffffff, @stop: #000000) {
+.gradient (@origin: left,
+@start: #ffffff,
+@stop: #000000) {
 	background-color: @start;
 	background-image: -webkit-linear-gradient(@origin, @start, @stop);
 	background-image: -moz-linear-gradient(@origin, @start, @stop);
@@ -70,11 +72,16 @@ background-image: url(file.png)
 }
 
 #someDiv {
-	.gradient(left, #663333, #333333);
+	.gradient(left,
+	#663333,
+	#333333);
 }
 
 .transformed {
-	.transform(5deg, 0.5, 1deg, 0px);
+	.transform(5deg,
+	0.5,
+	1deg,
+	0px);
 }
 
 .roundbordered {
