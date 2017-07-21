@@ -1,7 +1,7 @@
 {
   "name": "systemjs-less-plugin",
   "version": "2.0.0",
-  "description": "Loads less files on the fly, and compiles then at build time",
+  "description": "Loads less files on the fly, and compiles them at build time",
   "main": "less.js",
   "registry": "github",
   "scripts": {
@@ -22,7 +22,13 @@
   "bugs": {
     "url": "https://github.com/HuasoFoundries/systemjs-less-plugin/issues"
   },
+  "engines": {
+    "node": "6.10.x"
+  },
   "homepage": "https://github.com/HuasoFoundries/systemjs-less-plugin#readme",
+  "dependencies": {
+    "jspm": "^0.17.0-beta.41"
+  },
   "devDependencies": {
     "babel-eslint": "^6.1.0",
     "eslint": "^3.0.1",
@@ -56,17 +62,16 @@
       "image-size": "npm:image-size@0.5",
       "jodid25519": "npm:jodid25519@^1.0.0",
       "jsbn": "npm:jsbn@0.1",
-      "lessjs": "npm:less@^2.7.1",
+      "lessjs": "npm:less@^2.7.2",
       "mime": "npm:mime@^1.2.11",
       "mkdirp": "npm:mkdirp@^0.5.0",
       "net": "npm:jspm-nodelibs-net@^0.2.0",
       "os": "npm:jspm-nodelibs-os@^0.2.0",
       "path": "npm:jspm-nodelibs-path@^0.2.0",
-      "plugin-babel": "npm:systemjs-plugin-babel@^0.0.17",
       "process": "npm:jspm-nodelibs-process@^0.2.0",
       "promise": "npm:promise@^7.1.1",
       "querystring": "npm:jspm-nodelibs-querystring@^0.2.0",
-      "request": "npm:request@^2.78.0",
+      "request": "npm:request@^2.72.0",
       "source-map": "npm:source-map@^0.5.3",
       "stream": "npm:jspm-nodelibs-stream@^0.2.0",
       "string_decoder": "npm:jspm-nodelibs-string_decoder@^0.2.0",
@@ -92,54 +97,7 @@
         "ignore": [
           "test.js"
         ]
-      },
-      "npm:less@2.7.2": {
-        "main": "index.js",
-        "format": "cjs",
-        "meta": {
-          "*": {
-            "globals": {
-              "process": "process"
-            }
-          },
-          "*.json": {
-            "format": "json"
-          },
-          "dist/less.js": {
-            "cjsRequireDetection": false
-          },
-          "lib/less-node/environment.js": {
-            "globals": {
-              "Buffer": "buffer/global"
-            }
-          },
-          "test/copy-bom.js": {
-            "globals": {
-              "Buffer": "buffer/global"
-            }
-          }
-        },
-        "map": {
-          "./index": "./index.js",
-          "image-size": "imagesize.js",
-          "./lib/less": "./lib/less/index.js",
-          "./lib/less-browser": "./lib/less-browser/index.js",
-          "./lib/less-node": "./lib/less-node/index.js",
-          "./lib/less-rhino": "./lib/less-rhino/index.js",
-          "./lib/less/data": "./lib/less/data/index.js",
-          "./lib/less/functions": "./lib/less/functions/index.js",
-          "./lib/less/tree": "./lib/less/tree/index.js",
-          "./lib/less/visitors": "./lib/less/visitors/index.js",
-          "./test": "./test/index.js",
-          "./test/plugins/filemanager": "./test/plugins/filemanager/index.js",
-          "./test/plugins/postprocess": "./test/plugins/postprocess/index.js",
-          "./test/plugins/preprocess": "./test/plugins/preprocess/index.js",
-          "./test/plugins/visitor": "./test/plugins/visitor/index.js"
-        }
       }
     }
-  },
-  "dependencies": {
-    "jspm": "^0.17.0-beta.33"
   }
 }
