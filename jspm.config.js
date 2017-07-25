@@ -492,7 +492,6 @@ SystemJS.config({
   },
   transpiler: "plugin-babel",
   packages: {
-
     "less": {
       "main": "less.js"
     },
@@ -513,7 +512,7 @@ SystemJS.config({
     "github:*/*.json"
   ],
   map: {
-    "css": "github:systemjs/plugin-css@0.1.32"
+    "css": "github:systemjs/plugin-css@0.1.35"
   },
   packages: {}
 });
