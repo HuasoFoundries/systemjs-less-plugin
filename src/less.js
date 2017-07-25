@@ -1,5 +1,5 @@
 var CSSPluginBase = require('css/css-plugin-base.js');
-var JspmLessPlugin = require('./jspm-less-plugin.js');
+var JspmLessPlugin = require('./jspm-less-plugin/index.js');
 
 var isWin = typeof process !== 'undefined' && process.platform.match(/^win/);
 
@@ -13,7 +13,7 @@ module.exports = new CSSPluginBase(function compile(style, address, opts) {
 
   // use a file path in Node and a URL in the browser
   var filename = this.builder ? fromFileURL(address) : address,
-    lessPromise = this.builder ? System.import('./less.node.js', module.id) : System.import('./less.browser.js', module.id);
+    lessPromise = this.builder ? System.import('./bundled_less/less.node.js', module.id) : System.import('./bundled_less/less.browser.js', module.id);
 
   return lessPromise
     .then(function (less) {

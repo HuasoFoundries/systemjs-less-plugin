@@ -14,13 +14,13 @@ install:
 	jspm install
 
 build_node:
-	jspm build lessjs src/less.node.js --node  --minify
+	jspm build lessjs src/bundled_less/less.node.js --node  --minify
 
 build_browser:
-	jspm build lessjs/dist/less.js src/less.browser.js  --minify
+	jspm build lessjs/dist/less.js src/bundled_less/less.browser.js  --minify
 
 build_jspm_less_plugin:
-	jspm build src/jspm-less-plugin/index.js src/jspm-less-plugin.js --minify
+	$$(npm bin)/babel  jspm-less-plugin -d src/jspm-less-plugin
 
 
 build: build_node build_browser	build_jspm_less_plugin
