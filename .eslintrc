@@ -14,7 +14,8 @@
     {
         "require": true,
         "describe": false,
-        "it": false
+        "it": false,
+        "SystemJS": false
     },
 
 
