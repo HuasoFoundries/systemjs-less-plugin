@@ -2,7 +2,7 @@
 
 Translates less on the browser, inlines CSS conversion during build.
 
-[![npm](https://img.shields.io/npm/dm/systemjs-less-plugin.svg?style=plastic)](https://www.npmjs.com/package/systemjs-less-plugin) [![Code Climate](https://codeclimate.com/github/HuasoFoundries/systemjs-less-plugin/badges/gpa.svg)](https://codeclimate.com/github/HuasoFoundries/systemjs-less-plugin) [![Travis CI](https://travis-ci.org/HuasoFoundries/systemjs-less-plugin.svg)](https://travis-ci.org/HuasoFoundries/systemjs-less-plugin)
+[![npm](https://img.shields.io/npm/dm/systemjs-less-plugin.svg?style=plastic)](https://www.npmjs.com/package/systemjs-less-plugin) [![Code Climate](https://codeclimate.com/github/HuasoFoundries/systemjs-less-plugin/badges/gpa.svg)](https://codeclimate.com/github/HuasoFoundries/systemjs-less-plugin) [![Travis CI](https://travis-ci.org/HuasoFoundries/systemjs-less-plugin.svg)](https://travis-ci.org/HuasoFoundries/systemjs-less-plugin)[![Codacy Badge](https://api.codacy.com/project/badge/Grade/755f16a1ce1e4295aeeced27f2563ad0)](https://www.codacy.com/app/amenadiel/systemjs-less-plugin?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=HuasoFoundries/systemjs-less-plugin&amp;utm_campaign=Badge_Grade)
 
 This SystemJS plugin provides in-browser compilation of less stylesheets to regular CSS styles,
 as well as precompilation at the build stage when bundling your project with JSPM.
