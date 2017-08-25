@@ -1,6 +1,6 @@
 {
   "name": "systemjs-less-plugin",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Loads less files on the fly, and compiles them at build time",
   "main": "less.js",
   "registry": "github",
@@ -39,9 +39,7 @@
     "directories": {
       "lib": "src"
     },
-    "dependencies": {
-      "css": "systemjs/plugin-css@^0.1.35"
-    },
+    "dependencies": {},
     "devDependencies": {
       "assert": "npm:jspm-nodelibs-assert@^0.2.0",
       "bcrypt-pbkdf": "npm:bcrypt-pbkdf@^1.0.0",
@@ -82,6 +80,9 @@
       "util": "npm:jspm-nodelibs-util@^0.2.0",
       "vm": "npm:jspm-nodelibs-vm@^0.2.0",
       "zlib": "npm:jspm-nodelibs-zlib@^0.2.0"
+    },
+    "peerDependencies": {
+      "css": "systemjs/plugin-css@^0.1.35"
     },
     "overrides": {
       "npm:browserify-zlib@0.1.4": {

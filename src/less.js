@@ -1,5 +1,5 @@
 var CSSPluginBase = require('css/css-plugin-base.js');
-var JspmLessPlugin = require('./jspm-less-plugin/index.js');
+var JspmLessPlugin = require('./jspm-less-plugin.js');
 
 var isWin = typeof process !== 'undefined' && process.platform.match(/^win/);
 
