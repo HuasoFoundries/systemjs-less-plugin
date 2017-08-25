@@ -44,8 +44,8 @@ tag_and_push:
 		git add --all
 		git commit -a -m "Tag v $(v) $(m)"
 		git tag v$(v)
-		git push
 		git push --tags
+		git push
 		npm publish
 
 tag: build test release

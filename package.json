@@ -30,9 +30,9 @@
     "jspm": "^0.17.0-beta.41"
   },
   "devDependencies": {
-    "babel-eslint": "^6.1.0",
-    "eslint": "^3.0.1",
-    "mocha": "^2.4.5"
+    "babel-eslint": "^7.2.3",
+    "eslint": "^4.5.0",
+    "mocha": "^3.5.0"
   },
   "jspm": {
     "main": "less.js",
