@@ -512,7 +512,7 @@ SystemJS.config({
     "github:*/*.json"
   ],
   map: {
-    "css": "github:systemjs/plugin-css@0.1.35"
+    "css": "github:systemjs/plugin-css@0.1.36"
   },
   packages: {}
 });

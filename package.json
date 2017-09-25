@@ -1,6 +1,6 @@
 {
   "name": "systemjs-less-plugin",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "Loads less files on the fly, and compiles them at build time",
   "main": "less.js",
   "registry": "github",
@@ -30,6 +30,7 @@
     "jspm": "^0.17.0-beta.41"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-eslint": "^7.2.3",
     "eslint": "^4.5.0",
     "mocha": "^3.5.0"
@@ -82,7 +83,7 @@
       "zlib": "npm:jspm-nodelibs-zlib@^0.2.0"
     },
     "peerDependencies": {
-      "css": "systemjs/plugin-css@^0.1.35"
+      "css": "systemjs/plugin-css@^0.1.36"
     },
     "overrides": {
       "npm:browserify-zlib@0.1.4": {
