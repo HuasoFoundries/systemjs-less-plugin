@@ -12,8 +12,9 @@ module.exports = new CSSPluginBase(function compile(style, address, opts) {
   var loader = this;
 
   // use a file path in Node and a URL in the browser
-  var filename = this.builder ? fromFileURL(address) : address,
-    lessPromise = this.builder ? System.import('./bundled_less/less.node.js', module.id) : System.import('./bundled_less/less.browser.js', module.id);
+  var useNode = typeof process === 'object' && typeof process.versions.node === 'string';
+  var filename = useNode ? fromFileURL(address) : address,
+    lessPromise = useNode ? System.import('./bundled_less/less.node.js', module.id) : System.import('./bundled_less/less.browser.js', module.id);
 
   return lessPromise
     .then(function (less) {
