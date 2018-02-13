@@ -1,0 +1,31 @@
+#container .closed {
+  background-image: url("img/uploadifive/uploadifive-cancel.png");
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  display: block;
+  float: right;
+  height: 16px;
+  text-indent: -9999px;
+  width: 16px;
+}
+#container .close {
+  background-image: url(/img/uploadifive/uploadifive-cancel.png);
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  display: block;
+  float: right;
+  height: 16px;
+  text-indent: -9999px;
+  width: 16px;
+}
+#container #pastetext {
+  background-image: url(/img/pasteyupload_with_shp.jpg);
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+#container #pastetext.messagemode {
+  background-position-y: -300px;
+  height: 100px;
+  text-align: center;
+}
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImlucHV0Il0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLFVBQ0k7RUFDSSxzQkFBc0IseUNBQXRCO0VBQ0EsNEJBQUE7RUFDQSx3QkFBQTtFQUNBLGNBQUE7RUFDQSxZQUFBO0VBQ0EsWUFBQTtFQUNBLG9CQUFBO0VBQ0EsV0FBQTs7QUFUUixVQVlJO0VBQ0ksOERBQUE7RUFDQSw0QkFBQTtFQUNBLHdCQUFBO0VBQ0EsY0FBQTtFQUNBLFlBQUE7RUFDQSxZQUFBO0VBQ0Esb0JBQUE7RUFDQSxXQUFBOztBQXBCUixVQXlCSTtFQUNJLHFEQUFBO0VBRUEsK0JBQUE7RUFDQSw0QkFBQTs7QUFDQSxVQUxKLFdBS0s7RUFDRyw2QkFBQTtFQUNBLGFBQUE7RUFDQSxrQkFBQSJ9 */
